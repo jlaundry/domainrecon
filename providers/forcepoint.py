@@ -7,7 +7,7 @@ class Forcepoint(DKIMSelectorCheck):
 
     @property
     def is_active(self) -> bool:
-        if self._mx_includes(r"cust\d+-1.in.mailcontrol.com"):
+        if self._mx_includes(r"cust\d+-\d.in.mailcontrol.com"):
             return True
 
         if self._spf_includes(r"mailcontrol.com"):

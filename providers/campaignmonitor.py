@@ -6,4 +6,7 @@ class CampaignMonitor(DKIMSelectorCheck):
 
     @property
     def is_active(self) -> bool:
-        raise NotImplementedError
+        if self._spf_includes(r"cmail20.com"):
+            return True
+
+        return False

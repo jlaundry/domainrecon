@@ -12,7 +12,7 @@ class AmazonSES(DKIMSelectorCheck):
     @property
     def selectors(self) -> list:
         if self.is_active:
-            # It looks like AWS' DKIM selectors are completley random?
+            # It looks like AWS' DKIM selectors are completely random?
             raise NotImplementedError
         else:
             return []
