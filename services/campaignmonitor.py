@@ -1,8 +1,9 @@
 
-from . import DKIMSelectorCheck
+from . import BaseServiceProvider
 
-class CampaignMonitor(DKIMSelectorCheck):
-    selectors = ["cm"]
+class ServiceProvider(BaseServiceProvider):
+    name = "CampaignMonitor"
+    dkim_selectors = ["cm"]
 
     @property
     def is_active(self) -> bool:

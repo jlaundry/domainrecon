@@ -1,9 +1,10 @@
 
 import re
 
-from . import DKIMSelectorCheck
+from . import BaseServiceProvider
 
-class Forcepoint(DKIMSelectorCheck):
+class ServiceProvider(BaseServiceProvider):
+    name = "Forcepoint"
 
     @property
     def is_active(self) -> bool:
@@ -16,7 +17,7 @@ class Forcepoint(DKIMSelectorCheck):
         return False
 
     @property
-    def selectors(self) -> list:
+    def dkim_selectors(self) -> list:
         fp_customer_id = None
         for mx in self._mx_records:
             try:
@@ -24,7 +25,7 @@ class Forcepoint(DKIMSelectorCheck):
                 continue
             except AttributeError:
                 pass
-        
+
         if fp_customer_id is None:
             raise Exception("Couldn't determine Forcepoint customer ID (no matching MX records)")
 

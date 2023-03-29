@@ -1,7 +1,8 @@
 
-from . import DKIMSelectorCheck
+from . import BaseServiceProvider
 
-class AmazonSES(DKIMSelectorCheck):
+class ServiceProvider(BaseServiceProvider):
+    name = "AmazonSES"
 
     @property
     def is_active(self) -> bool:
@@ -10,7 +11,7 @@ class AmazonSES(DKIMSelectorCheck):
         return False
 
     @property
-    def selectors(self) -> list:
+    def dkim_selectors(self) -> list:
         if self.is_active:
             # It looks like AWS' DKIM selectors are completely random?
             raise NotImplementedError

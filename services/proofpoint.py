@@ -1,7 +1,8 @@
 
-from . import DKIMSelectorCheck
+from . import BaseServiceProvider
 
-class Proofpoint(DKIMSelectorCheck):
+class ServiceProvider(BaseServiceProvider):
+    name = "Proofpoint"
 
     @property
     def is_active(self) -> bool:
@@ -11,6 +12,6 @@ class Proofpoint(DKIMSelectorCheck):
         return False
 
     @property
-    def selectors(self) -> list:
+    def dkim_selectors(self) -> list:
         # looks like r"email\d{2,}"... not sure how it relates to the proofpoint mxa record?
         raise NotImplementedError

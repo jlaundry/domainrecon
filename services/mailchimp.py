@@ -1,8 +1,9 @@
 
-from . import DKIMSelectorCheck
+from . import BaseServiceProvider
 
-class Mailchimp(DKIMSelectorCheck):
-    selectors = ["k2", "k3"]
+class ServiceProvider(BaseServiceProvider):
+    name = "Mailchimp"
+    dkim_selectors = ["k2", "k3"]
 
     @property
     def is_active(self) -> bool:
