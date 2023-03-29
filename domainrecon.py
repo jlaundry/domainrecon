@@ -14,7 +14,7 @@ logging.warning("warning active")
 logging.error("error active")
 
 
-class DomainInfo():
+class DomainRecon():
     def __init__(self, domain, extra_dkim_selectors=[]):
         self.domain = domain
         self.extra_dkim_selectors = extra_dkim_selectors
