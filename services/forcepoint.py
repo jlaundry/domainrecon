@@ -1,7 +1,7 @@
 
 import re
 
-from . import BaseServiceProvider
+from . import BaseServiceProvider, InsufficientDataError
 
 class ServiceProvider(BaseServiceProvider):
     name = "Forcepoint"
@@ -27,6 +27,6 @@ class ServiceProvider(BaseServiceProvider):
                 pass
 
         if fp_customer_id is None:
-            raise Exception("Couldn't determine Forcepoint customer ID (no matching MX records)")
+            raise InsufficientDataError("Couldn't determine Forcepoint customer ID (no matching MX records)")
 
         return [f"fpkey{fp_customer_id}-1", f"fpkey{fp_customer_id}-2"]

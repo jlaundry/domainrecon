@@ -2,13 +2,18 @@
 import re
 
 
+class InsufficientDataError(Exception):
+    "Raised when the ServiceProvider was unable to fully resolve a record"
+    pass
+
+
 class BaseServiceProvider():
-    def __init__(self, domain, mx_records, spf_records, txt_records):
+    def __init__(self, domain, mx_records, spf_includes, txt_records):
 
         self._domain = domain
 
         self._mx_records = mx_records
-        self._spf_records = spf_records
+        self._spf_includes_records = spf_includes
         self._txt_records = txt_records
 
     @property
@@ -32,7 +37,7 @@ class BaseServiceProvider():
         return False
 
     def _spf_includes(self, regex:str) -> bool:
-        for record in self._spf_records:
+        for record in self._spf_includes_records:
             if re.search(regex, record) is not None:
                 return True
         return False
