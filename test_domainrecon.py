@@ -1,8 +1,7 @@
 
 import unittest
 
-from .. import domainrecon
-
+from .domainrecon import DomainRecon
 
 class TestDomainRecon(unittest.TestCase):
     """Test DomainRecon ServiceProvider"""
@@ -12,6 +11,6 @@ class TestDomainRecon(unittest.TestCase):
 
         domain = "example.com"
 
-        domain_recon = domainrecon.DomainRecon(domain)
+        domain_recon = DomainRecon(domain)
 
         

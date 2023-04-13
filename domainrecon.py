@@ -7,10 +7,8 @@ import json
 import dns.resolver
 import checkdmarc
 
-from services import InsufficientDataError
+from .services import InsufficientDataError
 
-
-SERVICES = [name for loader, name, is_pkg in pkgutil.iter_modules(['services']) if not is_pkg]
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -45,7 +43,9 @@ class DomainRecon():
         if len(self.__active_services) > 0:
             return self.__active_services
 
-        for service in SERVICES:
+        service_pkgs = [name for loader, name, is_pkg in pkgutil.iter_modules(['services']) if not is_pkg]
+
+        for service in service_pkgs:
             service_module = importlib.import_module(f"services.{service}")
             service_class = service_module.ServiceProvider
             inst = service_class(self.domain, self.dns_mx_records, self.dns_spf_includes, self.dns_txt_records)
@@ -55,7 +55,7 @@ class DomainRecon():
             if inst.is_active:
                 self.__active_services.append(inst)
 
-        logging.info(f"{len(self.__active_services)}/{len(SERVICES)} active services")
+        logging.info(f"{len(self.__active_services)}/{len(service_pkgs)} active services")
         return self.__active_services
 
     @property

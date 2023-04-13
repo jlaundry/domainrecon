@@ -16,7 +16,7 @@ class ServiceProvider(BaseServiceProvider):
     @property
     def dkim_selectors(self) -> list:
         hs_customer_id = None
-        for spf in self._spf_records:
+        for spf in self._spf_includes_records:
             try:
                 hs_customer_id = re.search(r"(\d+).spf\d+.hubspotemail.net", spf).group(1)
                 continue
