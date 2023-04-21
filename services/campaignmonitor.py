@@ -7,7 +7,7 @@ class ServiceProvider(BaseServiceProvider):
 
     @property
     def is_active(self) -> bool:
-        if self._spf_includes(r"cmail20.com"):
+        if self._spf_includes(r"cmail\d+.com"):
             return True
 
         return False
