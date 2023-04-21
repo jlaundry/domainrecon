@@ -1,7 +1,7 @@
 
 import re
 
-from . import BaseServiceProvider
+from . import BaseServiceProvider, InsufficientDataError
 
 class ServiceProvider(BaseServiceProvider):
     name = "HubSpot"
@@ -24,6 +24,6 @@ class ServiceProvider(BaseServiceProvider):
                 pass
 
         if hs_customer_id is None:
-            raise Exception("Couldn't determine HubSpot customer ID (no SPF info)")
+            raise InsufficientDataError("Couldn't determine HubSpot customer ID (no SPF info)")
 
         return [f"hs1-{hs_customer_id}", f"hs2-{hs_customer_id}"]
