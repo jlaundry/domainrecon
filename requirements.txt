@@ -1,2 +1,2 @@
-checkdmarc==5.12.7
+checkdmarc==5.12.12
 dnspython==2.7.0
